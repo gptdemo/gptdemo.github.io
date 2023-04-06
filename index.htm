@@ -6,20 +6,103 @@ header("Expires: 0"); // Proxies.
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Cats</title>
-    <!-- Add the Tailwind CSS stylesheet -->
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
-  </head>
-  <body class="bg-gray-100">
-    <header class="bg-white shadow-lg">
-      <h1 class="text-4xl font-bold text-gray-800 px-4 py-2">Cats</h1>
-    </header>
-    <main class="max-w-5xl mx-auto px-4 py-8">
-      <!-- ... -->
-    </main>
-    <footer class="bg-white border-t border-gray-300 px-4 py-2">
-      <p class="text-gray-600">Copyright © 2023</p>
-    </footer>
-  </body>
+
+<head>
+  <title>Cats</title>
+  <!-- Add the Tailwind CSS stylesheet -->
+  <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+  <style>
+    /* Define the carousel container styles */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Define the carousel track styles */
+    .carousel-track {
+      display: flex;
+      width: 500%;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Define the carousel slide styles */
+    .carousel-slide {
+      flex: 1 0 0%;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+  <header class="bg-white shadow-lg">
+    <h1 class="text-4xl font-bold text-gray-800 px-4 py-2">Cats</h1>
+  </header>
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <h2 class="text-2xl font-bold mb-4">Image Carousel</h2>
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <div class="carousel-slide">
+          <img class="w-full" src="cat1.jpg" alt="Cat 1">
+        </div>
+        <div class="carousel-slide">
+          <img class="w-full" src="cat2.jpg" alt="Cat 2">
+        </div>
+        <div class="carousel-slide">
+          <img class="w-full" src="cat3.jpg" alt="Cat 3">
+        </div>
+        <div class="carousel-slide">
+          <img class="w-full" src="cat4.jpg" alt="Cat 4">
+        </div>
+        <div class="carousel-slide">
+          <img class="w-full" src="cat5.jpg" alt="Cat 5">
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-white border-t border-gray-300 px-4 py-2">
+    <p class="text-gray-600">&copy; 2023</p>
+  </footer>
+  <script>
+    // Get the carousel track and slide elements
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+
+    // Calculate the slide width based on the number of visible slides
+    const slideWidth = slides[0].getBoundingClientRect().width + parseInt(getComputedStyle(slides[0]).marginRight);
+
+    // Set the initial position of the carousel track
+    track.style.transform = `translateX(-${slideWidth * 2}px)`;
+
+    // Handle the previous and next button clicks
+    const prevButton = document.createElement('button');
+    prevButton.textContent = 'Prev';
+    prevButton.addEventListener('click', () => {
+      const currentSlide = track.querySelector('.current-slide');
+      const prevSlide = currentSlide.previousElementSibling || slides[slides.length - 1];
+      track.style.transform = `translateX(-${prevSlide.offsetLeft}px)`;
+      currentSlide.classList.remove('current-slide');
+      prevSlide.classList.add('current-slide');
+    });
+
+    const nextButton = document.createElement('button');
+    nextButton.textContent = 'Next';
+    nextButton.addEventListener('click', () => {
+      const currentSlide = track.querySelector('.current-slide');
+      const nextSlide = currentSlide.nextElementSibling || slides[0];
+      track.style.transform = `translateX(-${nextSlide.offsetLeft}px)`;
+      currentSlide.classList.remove('current-slide');
+      nextSlide.classList.add('current-slide');
+    });
+
+    // Add the previous and next buttons to the webpage
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.appendChild(prevButton);
+    carouselContainer.appendChild(nextButton);
+
+    // Set the initial slide as the middle slide
+    slides[2].classList.add('current-slide');
+  </script>
+</body>
+
 </html>
