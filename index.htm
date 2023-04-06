@@ -37,9 +37,20 @@
         <img class="w-full" src="cat2.jpg" alt="Cat 2">
         <img class="w-full" src="cat3.jpg" alt="Cat 3">
       </section>
+      <!-- Add the button element with ID -->
+      <button id="cat-food-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+        Cat Food
+      </button>
     </main>
     <footer class="bg-white border-t border-gray-300 px-4 py-2">
         <p class="text-gray-600">Copyright © 2023</p>
     </footer>
+    <!-- Add the JavaScript code to handle the button click -->
+    <script>
+    const catFoodBtn = document.getElementById('cat-food-btn');
+    catFoodBtn.addEventListener('click', () => {
+    window.open('https://www.google.com/search?q=what+do+cats+eat');
+    });
+    </script>
   </body>
 </html>
