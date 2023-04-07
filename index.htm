@@ -77,7 +77,7 @@
     const slideWidth = slides[0].getBoundingClientRect().width + parseInt(getComputedStyle(slides[0]).marginRight);
 
     // Set the initial position of the carousel track
-    track.style.position = translateX(-${ slideWidth }px);
+    track.style.position = `translateX(-${ slideWidth }px)`;
 
     // Handle the previous and next button clicks
     const prevButton = document.createElement('button');
